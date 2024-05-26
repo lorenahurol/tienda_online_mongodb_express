@@ -14,10 +14,10 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.NjY1MzU1ZmM0ZWY3ZTlhZjM1Njg0OGI1.WUECWTGuZp1
 Content-Type: application/json
 
 {
-    "name": "Lapiz amarillo",
-    "description": "Pinta",
+    "name": "Lapiz verde",
+    "description": "Pinta en verde",
     "price": 22,
-    "stock": 13,
+    "stock": 12,
     "department": "oficina",
     "available": true
 }
@@ -40,10 +40,10 @@ POST {{HOST}}/api/users/register
 Content-Type: application/json
 
 {
-    "name": "Mario",
-    "email": "mario@gmail.com",
+    "name": "Adrian",
+    "email": "adrian@gmail.com",
     "password": "12345",
-    "role": "admin"
+    "role": "regular"
 }
 
 ### Login

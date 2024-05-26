@@ -27,6 +27,19 @@ const checkToken = async (req, res, next) => {
 
 }
 
+// Middleware de validate - Le pasamos el schema de validacion por parametro. Cuando se ejecute, devuelve la funcion del middleware. 
+
+const validate = (schema) => {
+    return async (req, res, next) => {
+        try {
+            await schema.validate(req.body, {abortEarly: false}); // Registra todos los errores
+            next();
+        } catch (error) {
+            res.json(error.errors);
+        }  
+    }
+}
+
 module.exports = {
-    checkToken
+    checkToken, validate
 }
