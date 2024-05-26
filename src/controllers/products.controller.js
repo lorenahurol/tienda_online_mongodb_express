@@ -1,16 +1,19 @@
 // Traer el modelo de producto:
+const { json } = require("express");
 const Product = require("../models/product.model");
 
 const getAllProducts = async (req, res, next) => {
     // Acciones sobre el modelo product:
     try {
-        const products = await Product.find();
+        // Populate: Extrae la informacion del campo owner:
+        const products = await Product.find().populate("owner");
+        /*
         // Iterar sobre los productos:
         for (let prod of products) {
             console.log(prod.priceTaxes);
-        }
+        } */
         res.json(products);
-    } catch (error) {
+    }catch (error) {
         next(error);
     }
 }
@@ -29,7 +32,23 @@ const getByPrice = async (req, res, next) => {
     }
 }
 
+const addToCart = async (req, res, next) => {
+    // Usuario loggeado, cart e insertamos:
+    try {
+        req.user.cart.push(req.body.product_id);
+        await req.user.save();
+        res.json({ message: "Producto agregado al carrito " });
+    } catch (error) {
+        next(error);
+    }
+    
+}
+
 const createProduct = async (req, res, next) => {
+
+    // Anadir el usuario loggeado al body del producto:
+    req.body.owner = req.user._id;
+
     // Le pasamos el body:
     try {
         const prod = await Product.create(req.body);
@@ -65,5 +84,5 @@ const deleteProduct = async (req, res, next) => {
 }
 
 module.exports = {
-    getAllProducts, createProduct, updateProduct, deleteProduct, getByPrice
+    getAllProducts, createProduct, updateProduct, deleteProduct, getByPrice, addToCart
 }

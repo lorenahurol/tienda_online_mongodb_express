@@ -3,20 +3,22 @@
 @HOST = http://localhost:{{PORT}}
 
 GET {{HOST}}/api/products
+Authorization: eyJhbGciOiJIUzI1NiJ9.NjY1MzU1ZmM0ZWY3ZTlhZjM1Njg0OGI1.WUECWTGuZp1RG_wYTqWpsVsbTJrvEB0jAhv41XQKzjU
 
 ### Recupero con filtro de precios:
 GET {{HOST}}/api/products/min/100/max/300
 
 ###
-POST {{HOST}}/api/products
+POST {{HOST}}/api/products/
+Authorization: eyJhbGciOiJIUzI1NiJ9.NjY1MzU1ZmM0ZWY3ZTlhZjM1Njg0OGI1.WUECWTGuZp1RG_wYTqWpsVsbTJrvEB0jAhv41XQKzjU
 Content-Type: application/json
 
 {
-    "name": "Thermomix",
-    "description": "Hace muchos tipos de comida",
-    "price": 1050,
-    "stock": 23,
-    "department": "home",
+    "name": "Lapiz amarillo",
+    "description": "Pinta",
+    "price": 22,
+    "stock": 13,
+    "department": "oficina",
     "available": true
 }
 
@@ -32,3 +34,36 @@ Content-Type: application/json
 
 ###
 DELETE {{HOST}}/api/products/66533e2851bf33d1e95c56b9
+
+### USERS
+POST {{HOST}}/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Mario",
+    "email": "mario@gmail.com",
+    "password": "12345",
+    "role": "admin"
+}
+
+### Login
+POST {{HOST}}/api/users/login
+Content-Type: application/json
+
+{
+    "email": "mario@gmail.com",
+    "password": "12345"
+}
+
+###
+PUT {{HOST}}/api/products/add-cart 
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.NjY1MzU1ZmM0ZWY3ZTlhZjM1Njg0OGI1.WUECWTGuZp1RG_wYTqWpsVsbTJrvEB0jAhv41XQKzjU
+
+{
+    "product_id": "6565cf9a470e9beb189f6705"
+}
+
+###
+GET {{HOST}}/api/users/profile
+Authorization: eyJhbGciOiJIUzI1NiJ9.NjY1MzU1ZmM0ZWY3ZTlhZjM1Njg0OGI1.WUECWTGuZp1RG_wYTqWpsVsbTJrvEB0jAhv41XQKzjU

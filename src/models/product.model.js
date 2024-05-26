@@ -10,7 +10,9 @@ const productSchema = new Schema({
     price: Number,
     stock: Number,
     department: String,
-    available: Boolean
+    available: Boolean,
+    // Dueño del producto. Se le pasa un objeto. Type del campo owner, ref: nombre de la coleccion:
+    owner: { type: Schema.Types.ObjectId, ref: "user" }
 }, {
     // Segundo parametro para opciones:
     versionKey: false,
